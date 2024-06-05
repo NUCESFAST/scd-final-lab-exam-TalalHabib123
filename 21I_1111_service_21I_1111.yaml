@@ -73,3 +73,18 @@ spec:
       port: 3114
       targetPort: 3114
   type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo
+  namespace: exam
+spec:
+  selector:
+    app: my-app
+    name: mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+  type: NodePort
