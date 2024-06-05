@@ -7,7 +7,9 @@ pipeline {
                 script {
                     def services = ['auth', 'classrooms', 'post', 'event-bus', 'client']
                     for (service in services) {
+                        // Start of step for 21I-1111
                         bat "docker build -t ${service} ./${service}"
+                        // End of step for 21I-1111
                     }
                 }
             }
@@ -19,9 +21,11 @@ pipeline {
                     script {
                         def services = ['auth', 'classrooms', 'post', 'event-bus', 'client']
                         for (service in services) {
+                            // Start of step for 21I-1111
                             bat "docker login -u %User% -p %Pass%"
                             bat "docker tag ${service} %User%/${service}"
                             bat "docker push %User%/${service}"
+                            // End of step for 21I-1111
                         }
                     }
                 }

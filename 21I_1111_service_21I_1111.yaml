@@ -1,0 +1,75 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-service
+  namespace: exam
+spec:
+  selector:
+    app: my-app
+    name: auth
+  ports:
+    - protocol: TCP
+      port: 3112
+      targetPort: 3112
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: classrooms-service
+  namespace: exam
+spec:
+  selector:
+    app: my-app
+    name: classrooms
+  ports:
+    - protocol: TCP
+      port: 3113
+      targetPort: 3113
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-service
+  namespace: exam
+spec:
+  selector:
+    app: my-app
+    name: client
+  ports:
+    - protocol: TCP
+      port: 4111
+      targetPort: 4111
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-bus-service
+  namespace: exam
+spec:
+  selector:
+    app: my-app
+    name: event-bus
+  ports:
+    - protocol: TCP
+      port: 3111
+      targetPort: 3111
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-service
+  namespace: exam
+spec:
+  selector:
+    app: my-app
+    name: post
+  ports:
+    - protocol: TCP
+      port: 3114
+      targetPort: 3114
+  type: NodePort

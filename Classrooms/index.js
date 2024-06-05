@@ -10,7 +10,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
-
+let users = {};
 var url = 'mongodb://mongo:27017/';
 
 app.post('/create_class', async (req, res) => {

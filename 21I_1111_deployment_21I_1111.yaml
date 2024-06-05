@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pvc
+  namespace: exam
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment
+  namespace: exam
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: auth
+        image: talalhabib123/auth
+        ports:
+        - containerPort: 3112
+      - name: classrooms
+        image: talalhabib123/classrooms
+        ports:
+        - containerPort: 3113
+      - name: client
+        image: talalhabib123/client
+        ports:
+        - containerPort: 4111
+      - name: event-bus
+        image: talalhabib123/event-bus
+        ports:
+        - containerPort: 3111
+      - name: post
+        image: talalhabib123/post
+        ports:  
+        - containerPort: 3114
+      - name: mongodb
+        image: mongo
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - name: mongo-storage
+          mountPath: /data/db
+      volumes:
+      - name: mongo-storage
+        persistentVolumeClaim:
+          claimName: mongo-pvc
