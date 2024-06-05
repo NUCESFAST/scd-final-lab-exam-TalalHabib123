@@ -11,12 +11,17 @@ spec:
       storage: 1Gi
 
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-app-deployment
   namespace: exam
+  labels:
+    app: my-app
+    environment: production
+  annotations:
+    description: "This is my application"
+    version: "1.0"
 spec:
   replicas: 1
   selector:
@@ -26,28 +31,67 @@ spec:
     metadata:
       labels:
         app: my-app
+        environment: production
+      annotations:
+        description: "This is my application"
+        version: "1.0"
     spec:
       containers:
       - name: auth
         image: talalhabib123/auth
         ports:
         - containerPort: 3112
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
       - name: classrooms
         image: talalhabib123/classrooms
         ports:
         - containerPort: 3113
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
       - name: client
         image: talalhabib123/client
         ports:
         - containerPort: 4111
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
       - name: event-bus
         image: talalhabib123/event-bus
         ports:
         - containerPort: 3111
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
       - name: post
         image: talalhabib123/post
         ports:  
         - containerPort: 3114
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
       - name: mongodb
         image: mongo
         ports:
@@ -55,6 +99,13 @@ spec:
         volumeMounts:
         - name: mongo-storage
           mountPath: /data/db
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
       volumes:
       - name: mongo-storage
         persistentVolumeClaim:
