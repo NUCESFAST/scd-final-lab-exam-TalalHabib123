@@ -1,0 +1,41 @@
+version: '3'
+services:
+  auth:
+    build: 
+      context: ./Auth
+      dockerfile: Dockerfile
+    ports:
+      - 3112:3112
+
+  classrooms:
+    build: 
+      context: ./Classrooms
+      dockerfile: Dockerfile
+    ports:
+      - 3113:3113
+
+  post:
+    build: 
+      context: ./Post
+      dockerfile: Dockerfile
+    ports:
+      - 3114:3114
+
+  event-bus:
+    build: 
+      context: ./event-bus
+      dockerfile: Dockerfile
+    ports:
+      - 3111:3111
+
+  client:
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - 4111:4111
+
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017

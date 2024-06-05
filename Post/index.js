@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-var url = 'mongodb://localhost:27017'
+var url = 'mongodb://mongo:27017'
 
 app.post('/create_post', async (req, res) => {
     const id = randomBytes(6).toString('hex');
@@ -29,7 +29,7 @@ app.post('/create_post', async (req, res) => {
         db.close();
     });
 
-    await axios.post('http://localhost:4009/events', {
+    await axios.post('http://localhost:3111/events', {
         type: 'PostCreated',
         data: 'postid'
     });
@@ -101,6 +101,6 @@ app.post('/events', async (req, res) => {
 })
 
 
-app.listen(4002, () => {
+app.listen(3114, () => {
     console.log('Post service listening on port 4002...');
 })
